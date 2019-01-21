@@ -21,9 +21,13 @@ class GameArea {
                     [1,0,1,2,1,2,1,2,1,2,1,0,1],
                     [1,0,0,2,0,2,0,2,2,0,0,0,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1]]
+        this.boundaries = [];
     }
     start(){
         document.querySelector('#game-board').appendChild(this.canvas);
+    }
+    clear(){
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     drawMap(){
         for (var i=0; i<this.map.length; i++){
@@ -53,5 +57,17 @@ class GameArea {
                 }
             }
         }
+    }
+    wallSides(){
+        for (var i=0; i<this.map.length; i++){
+            for (var j=0; j<this.map[i].length; j++){
+                if(this.map[i][j] === 1 || this.map[i][j] === 2){
+                    this.boundaries.push({top: 50*j, 
+                                        down: 50*j+50,
+                                        left: 50*i,
+                                        right: 50*i+50})
+                }
+            }
+        }    
     }
 }

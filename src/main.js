@@ -1,10 +1,28 @@
 var myGame = new GameArea();
 var myPlayer = new Player('Bob');
 
-function startGame(){
+function updateEverything(){
+    myGame.clear();
+    myPlayer.update();
+}
+
+function drawEverything(){
     myGame.drawMap();
-    myGame.start();
     myPlayer.draw();
+}
+
+function animation(){
+    updateEverything();
+    drawEverything();
+    window.requestAnimationFrame(animation);
+}
+
+function startGame(){
+    myGame.start();
+    myGame.drawMap();
+    myGame.wallSides();
+    myPlayer.draw();
+    animation();
 }
 
 // starting the game immediately
