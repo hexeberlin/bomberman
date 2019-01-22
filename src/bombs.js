@@ -4,6 +4,10 @@ class Bomb {
         this.startingTime = myGame.frame;
         this.power = 1;
         this.ctx = myGame.ctx;
+        this.left = 50*this.position[0];
+        this.right = 50*this.position[0] + 50;
+        this.top = 50*this.position[1];
+        this.down = 50*this.position[1] + 50;
     }
     draw(){
         this.ctx.drawImage(myGame.wallsImg, 
@@ -29,6 +33,13 @@ class Bomb {
                     }
                 }
             }
+            // //bomb should kill player if he is too close
+            // if(Math.abs(myPlayer.left-this.right) < 50 ||
+            //     Math.abs(myPlayer.right-this.left) < 50 ||
+            //     Math.abs(myPlayer.top-this.down) < 50 ||
+            //     Math.abs(myPlayer.down-this.top) < 50){
+            //         myPlayer.alive = 0;
+            //     }
             //remove the exploded bomb from myBombs array
             myBombs.shift();
         }

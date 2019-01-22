@@ -25,6 +25,17 @@ class GameArea {
         this.boundaries = [];
         this.frame = 0;
     }
+    intro(){
+        document.querySelector('#game-board').appendChild(this.canvas);
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+        this.ctx.textAlign = "center";
+        this.ctx.fillStyle = "white";
+        this.ctx.font = "bold 100px Times";
+        this.ctx.fillText("BOMBERMAN",this.canvas.width/2,200);
+        this.ctx.font = "bold 20px Arial";
+        this.ctx.fillText("PRESS ENTER TO START",this.canvas.width/2,500);
+    }
     start(){
         document.querySelector('#game-board').appendChild(this.canvas);
     }
@@ -74,9 +85,9 @@ class GameArea {
         }    
     }
     updateTimer(){
-        document.getElementById('timer').innerText = "Time spent: "
-        + ('0' + parseInt(myGame.frame/6000)).slice(-2) + ":" //minutes
-        + ('0' + parseInt(myGame.frame/100)).slice(-2) + ":" //seconds
-        + myGame.frame%100; //mlseconds
+        document.getElementById('timer').innerText = "Time left: "
+        + ('0' + parseInt((2-(myGame.frame/6000)))).slice(-2) + ":" //minutes
+        + ('0' + parseInt((60-(myGame.frame/100))%60)).slice(-2) + ":" //seconds
+        + ('0' + (2000-myGame.frame)%100).slice(-2); //mlseconds
     }
 }

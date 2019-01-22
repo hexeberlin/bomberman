@@ -8,6 +8,7 @@ class Player {
     this.speed = 5;
     this.playersImg = new Image();
     this.playersImg.src = "images/players.png";
+    this.alive = 1; //player is alive by default
   }
   draw() {
     this.ctx = myGame.ctx;
