@@ -6,8 +6,7 @@ class GameArea {
         this.ctx = this.canvas.getContext('2d');
         this.wallsImg = new Image();
         this.wallsImg.src = 'images/backgrounds.png';
-        //Define initial map, 0 = empty, 1 = solid wall, 2 = brick wall
-        this.map = initialMap;
+        this.grid = copyArray(initialMap);
         this.boundaries = [];
         this.frame = 0;
         this.gameWon = 0;
@@ -26,8 +25,8 @@ class GameArea {
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = "white";
-        this.ctx.strokeStyle = 'green';
-        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = 'darkred';
+        this.ctx.lineWidth = 3;
         this.ctx.font = "bold 100px Times";
         this.ctx.fillText("BOMBERMAN",this.canvas.width/2,200);
         this.ctx.strokeText("BOMBERMAN",this.canvas.width/2,200);
@@ -37,22 +36,22 @@ class GameArea {
     start(){
         this.introSound.pause();
         document.querySelector('#game-board').appendChild(this.canvas);
-        this.map = initialMap;
+        this.grid = copyArray(initialMap);
         this.frame = 0;
         this.gameWon = 0;
         //place the door behind a random brick wall
         var brickWalls = [];
         //save coordinates of all brick walls
-        for (var i=0; i<this.map.length; i++){
-            for (var j=0; j<this.map[i].length; j++){
-                if (this.map[i][j] === 2) brickWalls.push([i, j]);
+        for (var i=0; i<this.grid.length; i++){
+            for (var j=0; j<this.grid[i].length; j++){
+                if (this.grid[i][j] === 2) brickWalls.push([i, j]);
             }
         }
         //pick one wall randomly and place the door behind it
         var randomWall = brickWalls[Math.floor(Math.random()*brickWalls.length)]
         var randomWall0 = randomWall[0]
         var randomWall1 = randomWall[1]
-        this.map[randomWall0][randomWall1] = "D";
+        this.grid[randomWall0][randomWall1] = "D";
         //update door properties
         this.door.left = 50*randomWall0 + 20;
         this.door.right = this.door.left + 5;
@@ -63,9 +62,9 @@ class GameArea {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     drawMap(){
-        for (var i=0; i<this.map.length; i++){
-            for (var j=0; j<this.map[i].length; j++){
-                switch(this.map[i][j]){
+        for (var i=0; i<this.grid.length; i++){
+            for (var j=0; j<this.grid[i].length; j++){
+                switch(this.grid[i][j]){
                     case 0: {
                         this.ctx.fillStyle = '#009900';
                         this.ctx.fillRect(50*i,50*j,50,50);
@@ -101,9 +100,9 @@ class GameArea {
     }
     wallSides(){
         this.boundaries = [];
-        for (var i=0; i<this.map.length; i++){
-            for (var j=0; j<this.map[i].length; j++){
-                if(this.map[i][j] === 1 || this.map[i][j] === 2){
+        for (var i=0; i<this.grid.length; i++){
+            for (var j=0; j<this.grid[i].length; j++){
+                if(this.grid[i][j] === 1 || this.grid[i][j] === 2){
                     this.boundaries.push({top: 50*j, 
                                         down: 50*j+50,
                                         left: 50*i,

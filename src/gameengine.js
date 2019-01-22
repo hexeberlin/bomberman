@@ -5,3 +5,8 @@ function intersectRect(r1, r2) {
              r2.top >= r1.down ||
              r2.down <= r1.top);
   }
+
+//copy an array
+function copyArray(matrix) {
+    return matrix.map(row => row.slice());
+  }

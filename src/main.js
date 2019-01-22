@@ -1,7 +1,3 @@
-var myGame = new GameArea();
-var myPlayer = new Player("Bob");
-var myBombs = [];
-var myAnimation;
 var initialMap = [[1,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,0,0,2,2,0,2,2,2,0,0,0,1],
                 [1,0,1,2,1,2,1,0,1,2,1,0,1],
@@ -17,6 +13,11 @@ var initialMap = [[1,1,1,1,1,1,1,1,1,1,1,1,1],
                 [1,0,1,2,1,2,1,2,1,2,1,0,1],
                 [1,0,0,2,0,2,0,2,2,0,0,0,1],
                 [1,1,1,1,1,1,1,1,1,1,1,1,1]];
+var myGame = new GameArea();
+var myPlayer = new Player("Bob");
+var myBombs = [];
+var myAnimation;
+
 
 function updateEverything() {
   myGame.clear();
@@ -148,4 +149,4 @@ window.onload = function() {
             break;
         }
   };
-};
+}; 
