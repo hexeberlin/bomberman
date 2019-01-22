@@ -6,6 +6,7 @@ class GameArea {
         this.ctx = this.canvas.getContext('2d');
         this.wallsImg = new Image();
         this.wallsImg.src = 'images/backgrounds.png';
+        //Define initial map, 0 = empty, 1 = solid wall, 2 = brick wall
         this.map = [[1,1,1,1,1,1,1,1,1,1,1,1,1],
                     [1,0,0,2,2,0,2,2,2,0,0,0,1],
                     [1,0,1,2,1,2,1,0,1,2,1,0,1],
@@ -22,6 +23,7 @@ class GameArea {
                     [1,0,0,2,0,2,0,2,2,0,0,0,1],
                     [1,1,1,1,1,1,1,1,1,1,1,1,1]]
         this.boundaries = [];
+        this.frame = 0;
     }
     start(){
         document.querySelector('#game-board').appendChild(this.canvas);
@@ -34,7 +36,7 @@ class GameArea {
             for (var j=0; j<this.map[i].length; j++){
                 switch(this.map[i][j]){
                     case 0: {
-                        this.ctx.fillStyle = 'green';
+                        this.ctx.fillStyle = '#009900';
                         this.ctx.fillRect(50*i,50*j,50,50);
                         break;
                     }
@@ -59,6 +61,7 @@ class GameArea {
         }
     }
     wallSides(){
+        this.boundaries = [];
         for (var i=0; i<this.map.length; i++){
             for (var j=0; j<this.map[i].length; j++){
                 if(this.map[i][j] === 1 || this.map[i][j] === 2){
@@ -69,5 +72,11 @@ class GameArea {
                 }
             }
         }    
+    }
+    updateTimer(){
+        document.getElementById('timer').innerText = "Time spent: "
+        + ('0' + parseInt(myGame.frame/6000)).slice(-2) + ":" //minutes
+        + ('0' + parseInt(myGame.frame/100)).slice(-2) + ":" //seconds
+        + myGame.frame%100; //mlseconds
     }
 }
