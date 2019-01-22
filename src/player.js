@@ -5,7 +5,7 @@ class Player {
     this.top = 50;
     this.down = this.top + 50;
     this.right = this.left + 15 * (50 / 23);
-    this.speed = 5;
+    this.speed = 10;
     this.playersImg = new Image();
     this.playersImg.src = "images/players.png";
     this.alive = 1; //player is alive by default
@@ -38,5 +38,13 @@ class Player {
   }
   placeBomb() { //place bomb in the cell where most of players icon is in
     myBombs.push(new Bomb([Math.round(this.left/50),Math.round(this.top/50)]));
+  }
+  start(){
+    this.alive = 1;
+    this.left = 50 + (15 * (50 / 23)) / 4; //default starting position
+    this.top = 50;
+    this.down = this.top + 50;
+    this.right = this.left + 15 * (50 / 23);
+    this.speed = 5;
   }
 }
