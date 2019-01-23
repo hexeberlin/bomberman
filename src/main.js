@@ -91,8 +91,11 @@ function animation() {
     return;
   }
   // end the game if the player won
-  else if (intersectRect(myPlayer1,myGame.door) || intersectRect(myPlayer2,myGame.door)) {
-    endGame("win");
+  else if (intersectRect(myPlayer1,myGame.door)){
+    endGame("winP1");
+    return;
+  } else if (intersectRect(myPlayer2,myGame.door)){
+    endGame("winP2");
     return;
   } else { //if the game continues, continue the animation
     updateEverything();
@@ -104,8 +107,8 @@ function animation() {
 function startGame() {
   // re-set game and player properties, empty bombs arrat
   myGame.start();
-  myPlayer1 = new Player(p1Position.left, p1Position.right, p1Position.top, p1Position.down);
-  myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down);
+  myPlayer1 = new Player(p1Position.left, p1Position.right, p1Position.top, p1Position.down, playersImg, crop1);
+  myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down, playersImg, crop2);
   myBombs = [];
   // draw the map and the player
   myGame.drawMap();
@@ -132,15 +135,20 @@ function endGame(reason) {
         myGame.ctx.fillText("PRESS ENTER TO TRY AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
       break;
     case "dead":
-        myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
+        myGame.ctx.fillText("YOU BOTH DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
         myGame.ctx.fillText("PRESS ENTER TO TRY AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
       break;
-    case "win":
-        myGame.ctx.fillText("YOU WIN!", myGame.canvas.width / 2, myGame.canvas.width / 2);
+    case "winP1":
+        myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
         myGame.ctx.fillText("PRESS ENTER TO DO IT AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
       break;
+    case "winP2":
+      myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
+      myGame.ctx.font = "30px Arial";
+      myGame.ctx.fillText("PRESS ENTER TO DO IT AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
+    break;
   }
 }
 

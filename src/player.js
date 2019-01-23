@@ -94,7 +94,7 @@ class Player {
             break;
     }
   }
-
+  // update all sides
   update() {
     this.right = this.left + 15 * (50 / 23);
     this.down = this.top + 50;
