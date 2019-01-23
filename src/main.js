@@ -27,8 +27,10 @@ var p2Position = {
     top: 550,
     down: 600
 }
+// image with player icons
 var playersImg = new Image();
 playersImg.src = "images/players.png";
+//where to find each player in the stripe
 var crop1 = {
     up: [72, 21],
     down: [72, 45],
@@ -36,10 +38,10 @@ var crop1 = {
     right: [122, 48]
 }
 var crop2 = {
-    up: {x: 227, y: 21},
-    down: {x: 227, y: 45},
-    left: {x: 174, y: 44},
-    right: {x: 277, y:48}
+    up: [227, 21],
+    down: [227, 45],
+    left: [174, 44],
+    right: [277, 48]
 }
 var maxTimePerLevel = 12000;
 var myGame = new GameArea();
