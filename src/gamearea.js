@@ -74,7 +74,7 @@ class GameArea {
             for (var j=0; j<this.grid[i].length; j++){
                 switch(this.grid[i][j]){
                     case 0: //green field
-                        xCrop = 52;
+                        xCrop = 51;
                         yCrop = 15;
                         break;
                     case 1: // solid walls

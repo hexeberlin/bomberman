@@ -26,8 +26,8 @@ class Bomb {
             var bCol = this.position[1];
             var rows = myGame.grid.length;
             var cols = myGame.grid[0].length;
-            for(var row = 0; row < rows; row ++){
-                for(var col = 0; col < cols; col++){
+            for(let row = 0; row < rows; row ++){
+                for(let col = 0; col < cols; col++){
                     if((Math.abs(row - bRow) <= this.power && col === bCol)
                     || (Math.abs(col - bCol) <= this.power && row === bRow)) {
                         if(myGame.grid[row][col] === 2){
@@ -42,13 +42,21 @@ class Bomb {
             }
             this.sound.play();
             //bomb should kill player if he is too close
-            if((((Math.abs(myPlayer.left-this.right) < 50 ||
-                Math.abs(myPlayer.right-this.left) < 50) &&
-                myPlayer.top === this.top) ||
-                ((Math.abs(myPlayer.top-this.down) < 50 ||
-                Math.abs(myPlayer.down-this.top) < 50) &&
-                Math.abs(myPlayer.left-this.left) < 25))) {
-                    myPlayer.alive = 0;
+            if((((Math.abs(myPlayer1.left-this.right) < 50 ||
+                Math.abs(myPlayer1.right-this.left) < 50) &&
+                myPlayer1.top === this.top) ||
+                ((Math.abs(myPlayer1.top-this.down) < 50 ||
+                Math.abs(myPlayer1.down-this.top) < 50) &&
+                Math.abs(myPlayer1.left-this.left) < 25))) {
+                    myPlayer1.alive = 0;
+                }
+            if((((Math.abs(myPlayer2.left-this.right) < 50 ||
+                Math.abs(myPlayer2.right-this.left) < 50) &&
+                myPlayer2.top === this.top) ||
+                ((Math.abs(myPlayer2.top-this.down) < 50 ||
+                Math.abs(myPlayer2.down-this.top) < 50) &&
+                Math.abs(myPlayer2.left-this.left) < 25))) {
+                    myPlayer2.alive = 0;
                 }
             //remove the exploded bomb from myBombs array
             myBombs.shift();
