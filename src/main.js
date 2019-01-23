@@ -44,7 +44,7 @@ var crop2 = {
     right: [277, 48]
 }
 var maxTimePerLevel = 12000;
-var myGame = new GameArea();
+var myGame = new GameArea(1);
 var myPlayer1 = new Player(p1Position.left, p1Position.right, p1Position.top, p1Position.down, playersImg, crop1);
 var myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down, playersImg, crop2);
 var myBombs = [];
@@ -62,11 +62,11 @@ function updateEverything() {
   myGame.wallSides();
   //keep counting
   myGame.frame++;
-  //update player position
-  myPlayer1.update();
-  myPlayer2.update();
   //update timer
   myGame.updateTimer();
+  //update player position
+  myPlayer1.update();
+  if(myGame.numOfPlayer === 2) myPlayer2.update();
 }
 
 function drawEverything() {
@@ -76,7 +76,7 @@ function drawEverything() {
     element.draw();
   });
   myPlayer1.draw();
-  myPlayer2.draw();
+  if(myGame.numOfPlayer === 2) myPlayer2.draw();
 }
 
 function animation() {
@@ -86,7 +86,8 @@ function animation() {
     return;
   }
   // end the game if the player died
-  else if (myPlayer1.alive === 0 && myPlayer2.alive === 0) {
+  else if ((myGame.numOfPlayer === 1 && myPlayer1.alive === 0) ||
+  (myGame.numOfPlayer === 2 && myPlayer1.alive === 0 && myPlayer2.alive === 0)) {
     endGame("dead");
     return;
   }
@@ -94,7 +95,7 @@ function animation() {
   else if (intersectRect(myPlayer1,myGame.door)){
     endGame("winP1");
     return;
-  } else if (intersectRect(myPlayer2,myGame.door)){
+  } else if (myGame.numOfPlayer === 2 && intersectRect(myPlayer2,myGame.door)){
     endGame("winP2");
     return;
   } else { //if the game continues, continue the animation
@@ -104,16 +105,21 @@ function animation() {
   }
 }
 
-function startGame() {
+function startGame(num) {
   // re-set game and player properties, empty bombs arrat
+  if (num === 2) {myGame.numOfPlayer = 2};
   myGame.start();
   myPlayer1 = new Player(p1Position.left, p1Position.right, p1Position.top, p1Position.down, playersImg, crop1);
-  myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down, playersImg, crop2);
+  if (myGame.numOfPlayer === 2) {
+    myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down, playersImg, crop2);
+  }
   myBombs = [];
   // draw the map and the player
   myGame.drawMap();
   myPlayer1.draw();
-  myPlayer2.draw();
+  if (myGame.numOfPlayer === 2) {
+    myPlayer2.draw();
+  }
   // print instructions
   document.getElementById("whatToDo").innerText = "Find the hidden portal before the time is over!"
   // start the animation
@@ -132,23 +138,26 @@ function endGame(reason) {
     case "time":
         myGame.ctx.fillText("TIME IS OVER", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
-        myGame.ctx.fillText("PRESS ENTER TO TRY AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
-      break;
+        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
+        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
     case "dead":
-        myGame.ctx.fillText("YOU BOTH DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
+        myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
-        myGame.ctx.fillText("PRESS ENTER TO TRY AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
-      break;
+        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
+        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
+  break;
     case "winP1":
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
-        myGame.ctx.fillText("PRESS ENTER TO DO IT AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
-      break;
+        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
+        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
+        break;
     case "winP2":
-      myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
-      myGame.ctx.font = "30px Arial";
-      myGame.ctx.fillText("PRESS ENTER TO DO IT AGAIN", myGame.canvas.width / 2, myGame.canvas.width / 2 + 200);
-    break;
+        myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
+        myGame.ctx.font = "30px Arial";
+        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
+        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
+        break;
   }
 }
 
@@ -180,9 +189,13 @@ window.onload = function() {
             case 16:
                 myPlayer2.placeBomb();
                 break;
-            //start game on Enter
-            case 13:
-                startGame();
+            //start single game by pressing 1
+            case 49:
+                startGame(1);
+                break;
+            //start double game by pressing 2
+            case 50:
+                startGame(2);
                 break;
         }
   };

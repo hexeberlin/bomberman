@@ -7,7 +7,6 @@
     font-family: sans-serif; 
     font-size: 15px;
     width: 730px;
-    
 }
 button {
     margin-right: 10px;
@@ -21,4 +20,16 @@ button {
     font-family: sans-serif; 
     color: red;
     font-size: 15px;
+}
+
+.instructions {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif; 
+    font-size: 15px;
+    width: 730px;
+    
 }

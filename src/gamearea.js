@@ -1,26 +1,26 @@
 class GameArea {
-    constructor(){
+    constructor(numOfPlayers){
+        // canvas related properties
         this.canvas = document.createElement('canvas');
         this.canvas.width = 15*50;
         this.canvas.height = 13*50;
         this.ctx = this.canvas.getContext('2d');
+        // game map related properties
         this.wallsImg = new Image();
         this.wallsImg.src = 'images/backgrounds.png';
-        //for some reason it's not loading the image, will find out later
-        // this.introImg = new Image();
-        // this.introImg.src = 'images/black-cartoon-bomb.png';
         this.grid = copyArray(initialMap);
         this.boundaries = [];
-        this.frame = 0;
-        this.gameWon = 0;
-        this.introSound = new Audio('sounds/intro.mp3');
-        
         this.door = {
             left: 0,
             right: 0,
             top: 0,
             down: 0
         };
+        // basic game properties
+        this.frame = 0;
+        this.gameWon = 0;
+        this.introSound = new Audio('sounds/intro.mp3');
+        this.numOfPlayer = numOfPlayers;
     }
     intro(){
         //this.introSound.play();
@@ -37,7 +37,10 @@ class GameArea {
         //for some reason it's not loading the image, will find out later
         // this.ctx.drawImage(this.introImg, 300, 400, 200, 200);
         this.ctx.font = "bold 20px Arial";
-        this.ctx.fillText("PRESS ENTER TO START",this.canvas.width/2,500);
+        this.ctx.fillStyle = "lightblue";
+        this.ctx.fillText("PRESS 1 TO START A SINGLE GAME",this.canvas.width/2,500);
+        this.ctx.fillStyle = "lightgreen";
+        this.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",this.canvas.width/2,550);
     }
     start(){
         //stop the music and set play properties to default values

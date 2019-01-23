@@ -50,7 +50,8 @@ class Bomb {
                 Math.abs(myPlayer1.left-this.left) < 25))) {
                     myPlayer1.alive = 0;
                 }
-            if((((Math.abs(myPlayer2.left-this.right) < 50 ||
+            if(myGame.numOfPlayer === 2 && 
+                (((Math.abs(myPlayer2.left-this.right) < 50 ||
                 Math.abs(myPlayer2.right-this.left) < 50) &&
                 myPlayer2.top === this.top) ||
                 ((Math.abs(myPlayer2.top-this.down) < 50 ||
