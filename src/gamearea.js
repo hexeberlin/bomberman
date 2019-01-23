@@ -6,11 +6,15 @@ class GameArea {
         this.ctx = this.canvas.getContext('2d');
         this.wallsImg = new Image();
         this.wallsImg.src = 'images/backgrounds.png';
+        //for some reason it's not loading the image, will find out later
+        // this.introImg = new Image();
+        // this.introImg.src = 'images/black-cartoon-bomb.png';
         this.grid = copyArray(initialMap);
         this.boundaries = [];
         this.frame = 0;
         this.gameWon = 0;
         this.introSound = new Audio('sounds/intro.mp3');
+        
         this.door = {
             left: 0,
             right: 0,
@@ -19,7 +23,7 @@ class GameArea {
         };
     }
     intro(){
-        // this.introSound.play();
+        //this.introSound.play();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
@@ -30,10 +34,13 @@ class GameArea {
         this.ctx.font = "bold 100px Times";
         this.ctx.fillText("BOMBERMAN",this.canvas.width/2,200);
         this.ctx.strokeText("BOMBERMAN",this.canvas.width/2,200);
+        //for some reason it's not loading the image, will find out later
+        // this.ctx.drawImage(this.introImg, 300, 400, 200, 200);
         this.ctx.font = "bold 20px Arial";
         this.ctx.fillText("PRESS ENTER TO START",this.canvas.width/2,500);
     }
     start(){
+        //stop the music and set play properties to default values
         this.introSound.pause();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.grid = copyArray(initialMap);
@@ -62,42 +69,40 @@ class GameArea {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
     drawMap(){
+        var xCrop; var yCrop;
         for (var i=0; i<this.grid.length; i++){
             for (var j=0; j<this.grid[i].length; j++){
                 switch(this.grid[i][j]){
-                    case 0: {
-                        this.ctx.fillStyle = '#009900';
-                        this.ctx.fillRect(50*i,50*j,50,50);
+                    case 0: //green field
+                        xCrop = 52;
+                        yCrop = 15;
                         break;
-                    }
-                    case 1: {
-                        this.ctx.drawImage(this.wallsImg, 
-                            17,14, //position of the solid wall icon
-                            15,15, //size of the solid wall icon
-                            50*i,50*j, //where the wall should be in my canvas
-                            50, 50) //how big it should be
+                    case 1: // solid walls
+                        xCrop = 17;
+                        yCrop = 14;
                         break;
-                    }
-                    case 2: case "D": {
-                        this.ctx.drawImage(this.wallsImg, 
-                            0,14, //position of the brick wall icon
-                            15,15, //size of the brick wall icon
-                            50*i,50*j, //where the wall should be in my canvas
-                            50, 50) //how big it should be
+                    case 2: case "D": //brick wall and hidden door
+                        xCrop = 0;
+                        yCrop = 14;
                         break;
-                    }
-                    case "F": {
-                        this.ctx.drawImage(this.wallsImg, 
-                            86,14, //position of the brick wall icon
-                            15,15, //size of the brick wall icon
-                            50*i,50*j, //where the wall should be in my canvas
-                            50, 50) //how big it should be
+                    case "F": //found door
+                        xCrop = 86;
+                        yCrop = 14;
                         break;
-                    }
+                    case "E": //explosion
+                        xCrop = 102;
+                        yCrop = 133;
+                        break;
                 }
+                this.ctx.drawImage(this.wallsImg, 
+                    xCrop,yCrop, //position in the sprite
+                    15,15, //size in the sprite
+                    50*i,50*j, //position on the  canvas
+                    50, 50) //size on the canvas
             }
         }
     }
+    //calculate all the boundaries
     wallSides(){
         this.boundaries = [];
         for (var i=0; i<this.grid.length; i++){
@@ -113,8 +118,8 @@ class GameArea {
     }
     updateTimer(){
         document.getElementById('timer').innerText = "Time left: "
-        + ('0' + parseInt((2-(myGame.frame/6000)))).slice(-2) + ":" //minutes
-        + ('0' + parseInt((60-(myGame.frame/100))%60)).slice(-2) + ":" //seconds
-        + ('0' + (2000-myGame.frame)%100).slice(-2); //mlseconds
+        + ('0' + parseInt((maxTimePerLevel-this.frame)/6000)).slice(-2) + ":" //minutes
+        + ('0' + parseInt(((maxTimePerLevel-this.frame)/100)%60)).slice(-2) + ":" //seconds
+        + ('0' + ((maxTimePerLevel-this.frame)%100)).slice(-2); //mlseconds
     }
 }

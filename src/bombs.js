@@ -9,10 +9,11 @@ class Bomb {
         this.top = 50*this.position[1];
         this.down = 50*this.position[1] + 50;
         this.sound = new Audio('sounds/bomb.mp3');
+        this.found = new Audio('sounds/whoopie.mp3');
     }
     draw(){
         this.ctx.drawImage(myGame.wallsImg, 
-            17,48,
+            0,48,
             15,15,
             50*this.position[0], 50*this.position[1],
             50,50);
@@ -44,7 +45,7 @@ class Bomb {
                 myPlayer.top === this.top) ||
                 ((Math.abs(myPlayer.top-this.down) < 50 ||
                 Math.abs(myPlayer.down-this.top) < 50) &&
-                Math.abs(myPlayer.left-this.left) <25))) {
+                Math.abs(myPlayer.left-this.left) < 25))) {
                     myPlayer.alive = 0;
                 }
             //remove the exploded bomb from myBombs array
