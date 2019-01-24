@@ -35,10 +35,10 @@ class Bomb {
                             setTimeout(function(){myGame.grid[row][col] = 0;}, 1000);
                         } else if (myGame.grid[row][col] === "D") {
                             myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){myGame.grid[row][col] = "F";}, 1000); //found the door
-                        } else if (myGame.grid[row][col] === "SH") {
-                            myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){myGame.grid[row][col] = "SF";}, 1000); //found the door
+                            setTimeout(function(){
+                                myGame.grid[row][col] = "F";
+                                found.play();
+                            }, 1000); //found the door
                         }
                     }
                 }
@@ -46,12 +46,14 @@ class Bomb {
             myGame.grid[this.position[0]][this.position[1]] = 0;
             this.sound.play();
             //bomb should kill player if he is too close
+            var deadSound = new Audio("sounds/uh_oh.mp3");
             if((((Math.abs(myPlayer1.left-this.right) < 50 ||
                 Math.abs(myPlayer1.right-this.left) < 50) &&
                 myPlayer1.top === this.top) ||
                 ((Math.abs(myPlayer1.top-this.down) < 50 ||
                 Math.abs(myPlayer1.down-this.top) < 50) &&
                 Math.abs(myPlayer1.left-this.left) < 25))) {
+                    deadSound.play();
                     myPlayer1.alive = 0;
                 }
             if(myGame.numOfPlayer === 2 && 
@@ -61,6 +63,7 @@ class Bomb {
                 ((Math.abs(myPlayer2.top-this.down) < 50 ||
                 Math.abs(myPlayer2.down-this.top) < 50) &&
                 Math.abs(myPlayer2.left-this.left) < 25))) {
+                    deadSound.play();
                     myPlayer2.alive = 0;
                 }
             //remove the exploded bomb from myBombs array

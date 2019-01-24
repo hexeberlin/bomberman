@@ -137,12 +137,15 @@ function endGame(reason) {
   myGame.gameStarted = 0;
   //stop the animation
   window.cancelAnimationFrame(myAnimation);
-  //print a message according to the reason why the game stopped
+  //print a message and play a sound according to the reason why the game stopped
+  var alert = new Audio("sounds/alert.mp3");
+  var wow = new Audio("sounds/wow.mp3")
   myGame.ctx.textAlign = "center";
   myGame.ctx.fillStyle = "red";
   myGame.ctx.font = "bold 50px Arial";
   switch (reason) {
     case "time":
+        alert.play();
         myGame.ctx.fillText("TIME IS OVER", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
@@ -155,12 +158,14 @@ function endGame(reason) {
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP1":
+        wow.play();
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP2":
+        wow.play();
         myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     

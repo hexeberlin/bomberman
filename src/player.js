@@ -9,6 +9,7 @@ class Player {
     this.crop = crop;
     this.alive = 1; //player is alive by default
     this.speed = initialSpeed;
+    this.bombSound = new Audio("sounds/bombplaced.mp3")
   }
   draw() {
     if(this.alive === 1){
@@ -109,6 +110,7 @@ class Player {
       }
     }
     myBombs.push(new Bomb([bombX, bombY]));
+    this.bombSound.play();
     //add the bomb to the grid to be considered as a boundary
     setTimeout(function(){myGame.grid[bombX][bombY] = "B"},1000);
   }
