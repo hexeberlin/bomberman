@@ -18,12 +18,13 @@ class GameArea {
         };
         // basic game properties
         this.frame = 0;
+        this.gameStarted = 0;
         this.gameWon = 0;
         this.introSound = new Audio('sounds/intro.mp3');
         this.numOfPlayer = numOfPlayers;
     }
     intro(){
-        //this.introSound.play();
+        this.introSound.play();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
@@ -44,6 +45,7 @@ class GameArea {
     }
     start(){
         //stop the music and set play properties to default values
+        this.gameStarted = 1;
         this.introSound.pause();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.grid = copyArray(initialMap);

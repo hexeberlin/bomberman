@@ -101,8 +101,14 @@ class Player {
   }
   // place bomb in the cell where most of players icon is in
   placeBomb() {
-    myBombs.push(
-      new Bomb([Math.round(this.left / 50), Math.round(this.top / 50)])
+    var bombX = Math.round(this.left / 50);
+    var bombY = Math.round(this.top / 50);
+    for (var i = 0; i < myBombs.length; i++){
+      if(myBombs[i === [bombX, bombY]]){
+        return;
+      }
+    }
+    myBombs.push(new Bomb([bombX, bombY])
     );
   }
 }
