@@ -6,4 +6,4 @@ If you play with a friend, you play against each other and can even kill the oth
 
 Developed after the 2nd week in [Ironhack Berlin Coding Camp](https://www.ironhack.com/en/courses/web-development-bootcamp) for WebDev.
 
-[PLAY IT!] (https://hexeberlin.github.io/Bomberman/bomberman.html)
+[PLAY IT!](https://hexeberlin.github.io/Bomberman/bomberman.html)
