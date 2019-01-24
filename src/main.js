@@ -140,6 +140,10 @@ function endGame(reason) {
   //print a message and play a sound according to the reason why the game stopped
   var alert = new Audio("sounds/alert.mp3");
   var wow = new Audio("sounds/wow.mp3")
+  myGame.ctx.globalAlpha = 0.5;
+  myGame.ctx.fillStyle = "black";
+  myGame.ctx.fillRect(100, 300, 550, 300);
+  myGame.ctx.globalAlpha = 1;
   myGame.ctx.textAlign = "center";
   myGame.ctx.fillStyle = "red";
   myGame.ctx.font = "bold 50px Arial";
@@ -148,12 +152,14 @@ function endGame(reason) {
         alert.play();
         myGame.ctx.fillText("TIME IS OVER", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
+        myGame.ctx.fillStyle = "white";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "dead":
         myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
+        myGame.ctx.fillStyle = "white";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
@@ -161,6 +167,7 @@ function endGame(reason) {
         wow.play();
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
+        myGame.ctx.fillStyle = "white";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
@@ -168,6 +175,7 @@ function endGame(reason) {
         wow.play();
         myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "bold 30px Arial";
+        myGame.ctx.fillStyle = "white";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
