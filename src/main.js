@@ -106,8 +106,6 @@ function animation() {
 }
 
 function startGame(num) {
-  //stop intro music
-  document.getElementById("introSound").pause();
   myGame.numOfPlayer = num;
   // re-set game and player properties, empty bombs arrat
   if (num === 2) {myGame.numOfPlayer = 2};
@@ -182,9 +180,6 @@ function endGame(reason) {
   }
 }
 window.onload = function() {
-    //play intro music
-    document.getElementById("introSound").play()
-    //start by showing the intro screen
     myGame.intro();
     //define key actions depending on the state of the game
     document.onkeydown = function(event) {
