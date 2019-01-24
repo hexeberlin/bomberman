@@ -106,6 +106,7 @@ function animation() {
 }
 
 function startGame(num) {
+  myGame.numOfPlayer = num;
   // re-set game and player properties, empty bombs arrat
   if (num === 2) {myGame.numOfPlayer = 2};
   myGame.start();
@@ -141,12 +142,13 @@ function endGame(reason) {
         myGame.ctx.font = "30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
+        break;
     case "dead":
         myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
-  break;
+        break;
     case "winP1":
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         myGame.ctx.font = "30px Arial";
