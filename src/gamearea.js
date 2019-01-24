@@ -22,10 +22,10 @@ class GameArea {
         this.gameWon = 0;
         this.numOfPlayer = numOfPlayers;
         //intro music
-        this.introSound = new Audio('sounds/intro.mp3');
+        // this.introSound = new Audio('sounds/intro.mp3');
     }
     intro(){
-        this.introSound.play();
+        // this.introSound.play();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
@@ -47,7 +47,7 @@ class GameArea {
     start(){
         //stop the music and set play properties to default values
         this.gameStarted = 1;
-        this.introSound.pause();
+        // this.introSound.pause();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.grid = copyArray(initialMap);
         this.frame = 0;

@@ -106,6 +106,7 @@ function animation() {
 }
 
 function startGame(num) {
+  document.getElementById("introSound").pause();
   myGame.numOfPlayer = num;
   // re-set game and player properties, empty bombs arrat
   if (num === 2) {myGame.numOfPlayer = 2};
@@ -166,6 +167,15 @@ function endGame(reason) {
 
 window.onload = function() {
     //start by showing the intro screen
+    var playPromise = document.getElementById("introSound").play() 
+    if (playPromise !== undefined){
+      playPromise.then(function(){
+        console.log('hey from promise')
+      }).catch(function(error){
+        console.log(playPromise)
+      })
+    } 
+
     myGame.intro();
     //define key actions depending on the state of the game
     document.onkeydown = function(event) {
