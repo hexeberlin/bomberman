@@ -108,7 +108,7 @@ class Player {
       if(myBombs[i === [bombX, bombY]]){
         return;
       }
-    }
+    } 
     myBombs.push(new Bomb([bombX, bombY]));
     this.bombSound.play();
     //add the bomb to the grid to be considered as a boundary
