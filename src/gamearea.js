@@ -20,11 +20,12 @@ class GameArea {
         this.frame = 0;
         this.gameStarted = 0;
         this.gameWon = 0;
-        this.introSound = new Audio('sounds/intro.mp3');
         this.numOfPlayer = numOfPlayers;
+        //intro music
+        this.introSound = new Audio('sounds/intro.mp3');
     }
     intro(){
-        // this.introSound.play();
+        this.introSound.play();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
@@ -98,6 +99,10 @@ class GameArea {
                         xCrop = 102;
                         yCrop = 133;
                         break;
+                    case "B": //bomb
+                        xCrop = 0;
+                        yCrop = 48;
+                        break;
                 }
                 this.ctx.drawImage(this.wallsImg, 
                     xCrop,yCrop, //position in the sprite
@@ -112,7 +117,7 @@ class GameArea {
         this.boundaries = [];
         for (var i=0; i<this.grid.length; i++){
             for (var j=0; j<this.grid[i].length; j++){
-                if(this.grid[i][j] === 1 || this.grid[i][j] === 2){
+                if(this.grid[i][j] === 1 || this.grid[i][j] === 2 || this.grid[i][j] === "B"){
                     this.boundaries.push({top: 50*j, 
                                         down: 50*j+50,
                                         left: 50*i,

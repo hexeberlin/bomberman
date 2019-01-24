@@ -40,6 +40,7 @@ class Bomb {
                     }
                 }
             }
+            myGame.grid[this.position[0]][this.position[1]] = 0;
             this.sound.play();
             //bomb should kill player if he is too close
             if((((Math.abs(myPlayer1.left-this.right) < 50 ||

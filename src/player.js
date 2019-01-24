@@ -108,7 +108,7 @@ class Player {
         return;
       }
     }
-    myBombs.push(new Bomb([bombX, bombY])
-    );
+    myBombs.push(new Bomb([bombX, bombY]));
+    setTimeout(function(){myGame.grid[bombX][bombY] = "B"},1000);
   }
 }
