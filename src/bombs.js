@@ -36,6 +36,9 @@ class Bomb {
                         } else if (myGame.grid[row][col] === "D") {
                             myGame.grid[row][col] = "E"; //show explosion first
                             setTimeout(function(){myGame.grid[row][col] = "F";}, 1000); //found the door
+                        } else if (myGame.grid[row][col] === "SH") {
+                            myGame.grid[row][col] = "E"; //show explosion first
+                            setTimeout(function(){myGame.grid[row][col] = "SF";}, 1000); //found the door
                         }
                     }
                 }

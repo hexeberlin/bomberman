@@ -91,7 +91,7 @@ function animation() {
     endGame("dead");
     return;
   }
-  // end the game if the player won
+  // end the game if one of the players won
   else if (intersectRect(myPlayer1,myGame.door)){
     endGame("winP1");
     return;
@@ -125,6 +125,9 @@ function startGame(num) {
   }
   // print instructions
   document.getElementById("whatToDo").innerText = "Find the hidden portal before the time is over!"
+  if(myGame.numOfPlayer === 2){
+    document.getElementById("instructions").innerText = "Player 1: ARROWS and SPACE <-----------------------------------------------> Player 2: WSAD and SHIFT"
+  }
   // start the animation
   animation();
 }

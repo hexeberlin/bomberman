@@ -18,11 +18,12 @@ button {
 }
 #timer {
     font-family: sans-serif; 
+    font-weight: bold;
     color: red;
     font-size: 15px;
 }
 
-.instructions {
+#instructions {
     display: flex;
     flex-direction: row;
     margin: 10px;
@@ -31,5 +32,7 @@ button {
     font-family: sans-serif; 
     font-size: 15px;
     width: 730px;
-    
+}
+#instructions, #whatToDo {
+    font-weight: bold;
 }

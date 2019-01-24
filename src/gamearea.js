@@ -16,13 +16,17 @@ class GameArea {
             top: 0,
             down: 0
         };
+        this.speedBonus= {
+            left: 0,
+            right: 0,
+            top: 0,
+            down: 0
+        };
         // basic game properties
         this.frame = 0;
         this.gameStarted = 0;
         this.gameWon = 0;
         this.numOfPlayer = numOfPlayers;
-        //intro music
-        // this.introSound = new Audio('sounds/intro.mp3');
     }
     intro(){
         // this.introSound.play();
@@ -36,13 +40,10 @@ class GameArea {
         this.ctx.font = "bold 100px Times";
         this.ctx.fillText("BOMBERMAN",this.canvas.width/2,200);
         this.ctx.strokeText("BOMBERMAN",this.canvas.width/2,200);
-        //for some reason it's not loading the image, will find out later
-        // this.ctx.drawImage(this.introImg, 300, 400, 200, 200);
         this.ctx.font = "bold 20px Arial";
-        this.ctx.fillStyle = "lightblue";
-        this.ctx.fillText("PRESS 1 TO START A SINGLE GAME",this.canvas.width/2,500);
-        this.ctx.fillStyle = "lightgreen";
-        this.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",this.canvas.width/2,550);
+        this.ctx.fillText("PRESS ON YOUR KEYBOARD:",this.canvas.width/2,500);
+        this.ctx.fillText("1 - PLAY ALONE",this.canvas.width/2,550);
+        this.ctx.fillText("2 - PLAY WITH A FRIEND",this.canvas.width/2,600);
     }
     start(){
         //set play properties to default values
@@ -51,7 +52,8 @@ class GameArea {
         this.grid = copyArray(initialMap);
         this.frame = 0;
         this.gameWon = 0;
-        //place the door behind a random brick wall
+        
+        //EXIT DOOR
         var brickWalls = [];
         //save coordinates of all brick walls
         for (var i=0; i<this.grid.length; i++){
@@ -86,12 +88,12 @@ class GameArea {
                         xCrop = 17;
                         yCrop = 14;
                         break;
-                    case 2: case "D": //brick wall and hidden door
+                    case 2: case "D": //brick wall, hidden door
                         xCrop = 0;
                         yCrop = 14;
                         break;
                     case "F": //found door
-                        xCrop = 86;
+                        xCrop = 374;
                         yCrop = 14;
                         break;
                     case "E": //explosion
