@@ -38,6 +38,6 @@ button {
     font-size: 15px;
     width: 730px;
 }
-#instructions, #whatToDo {
+#instructions{
     font-weight: bold;
 }

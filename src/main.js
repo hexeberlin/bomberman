@@ -92,7 +92,11 @@ function animation() {
     return;
   }
   // end the game if one of the players won
-  else if (intersectRect(myPlayer1,myGame.door)){
+  else if (myGame.numOfPlayer === 1 &&intersectRect(myPlayer1,myGame.door)){
+    endGame("win");
+    return;
+  }
+  else if (myGame.numOfPlayer === 2 &&intersectRect(myPlayer1,myGame.door)){
     endGame("winP1");
     return;
   } else if (myGame.numOfPlayer === 2 && intersectRect(myPlayer2,myGame.door)){
@@ -122,7 +126,7 @@ function startGame(num) {
     myPlayer2.draw();
   }
   // print instructions
-  document.getElementById("whatToDo").innerText = "Find the hidden portal before the time is over!"
+  document.getElementById("whatToDo").innerHTML = "Get away from the <b>bombs</b> and find the hidden <b>portal</b> before the <b>time</b> is over!"
   if(myGame.numOfPlayer === 2){
     document.getElementById("instructions").innerText = "Player 1: ARROWS and SPACE <-----------------------------------------------> Player 2: WSAD and SHIFT"
   }
@@ -152,6 +156,10 @@ function endGame(reason) {
         break;
     case "dead":
         myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
+        break;
+    case "win":
+        wow.play();
+        myGame.ctx.fillText("YOU WIN!", myGame.canvas.width / 2, myGame.canvas.width / 2);
         break;
     case "winP1":
         wow.play();
