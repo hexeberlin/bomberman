@@ -149,34 +149,65 @@ function endGame(reason) {
     case "time":
         alert.play();
         myGame.ctx.fillText("TIME IS OVER", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "bold 30px Arial";
-        myGame.ctx.fillStyle = "white";
-        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
-        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "dead":
         myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "bold 30px Arial";
-        myGame.ctx.fillStyle = "white";
-        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
-        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP1":
         wow.play();
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "bold 30px Arial";
-        myGame.ctx.fillStyle = "white";
-        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
-        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP2":
         wow.play();
         myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "bold 30px Arial";
-        myGame.ctx.fillStyle = "white";
-        myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
-        myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
+  }
+  myGame.ctx.font = "bold 30px Arial";
+  myGame.ctx.fillStyle = "white";
+  myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
+  myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
+  
+}
+var keysActions = {
+  left: {
+    state: false,
+    action(){ myPlayer1.move("left")}
+  },
+  right: {
+    state: false,
+    action(){ myPlayer1.move("right")}
+  },
+  down: {
+    state: false,
+    action(){ myPlayer1.move("down")}
+  },
+  up: {
+    state: false,
+    action(){ myPlayer1.move("up")}
+  },
+  space: {
+    state: false,
+    action(){ myPlayer1.placeBomb()}
+  },
+  W: {
+    state: false,
+    action(){ myPlayer2.move("up")}
+  },
+  D: {
+    state: false,
+    action(){ myPlayer2.move("right")}
+  },
+  S: {
+    state: false,
+    action(){ myPlayer2.move("down")}
+  },
+  A: {
+    state: false,
+    action(){ myPlayer2.move("left")}
+  },
+  shift: {
+    state: false,
+    action(){ myPlayer2.placeBomb()}
   }
 }
 window.onload = function() {
@@ -184,43 +215,92 @@ window.onload = function() {
     //define key actions depending on the state of the game
     document.onkeydown = function(event) {
         event.preventDefault();
-        switch (event.keyCode) {
-            //move player1 with arrows
+        //change status of the pressed key in the keysAction object
+        if(myGame.gameStarted === 1 && myPlayer1.alive === 1){
+          switch (event.keyCode) {
             case 37: //left arrow
+              keysActions.left.state = true; break;
             case 38: //up arrow
+              keysActions.up.state = true; break;
             case 39: //right arrow
+              keysActions.right.state = true; break;
             case 40: //down arrow
-                if(myGame.gameStarted === 1 && myPlayer1.alive === 1)
-                myPlayer1.move(event.keyCode);
-                break;
+              keysActions.down.state = true; break;
+            case 32: //space
+              keysActions.space.state = true; break;
+          }
+        }
+        if(myGame.gameStarted === 1 && myGame.numOfPlayer === 2 && myPlayer2.alive === 1){
+          switch (event.keyCode) {
             //move player2 with WSAD
             case 65: //A
+              keysActions.A.state = true; break;
             case 87: //W
+              keysActions.W.state = true; break;
             case 68: //D
+              keysActions.D.state = true; break;
             case 83: //S
-                if(myGame.gameStarted === 1 && myGame.numOfPlayer === 2 && myPlayer2.alive === 1)
-                myPlayer2.move(event.keyCode);
-                break;
-            //place bomb with player1 using space
-            case 32:
-                if(myGame.gameStarted === 1 && myPlayer1.alive === 1)
-                myPlayer1.placeBomb();
-                break;
-            //place bomb with player2 using shift
-            case 16:
-                if(myGame.gameStarted === 1 && myGame.numOfPlayer === 2 && myPlayer2.alive === 1)
-                myPlayer2.placeBomb();
-                break;
-            //start single game by pressing 1
-            case 49:
-                if(myGame.gameStarted === 0)
-                startGame(1);
-                break;
-            //start double game by pressing 2
-            case 50:
-                if(myGame.gameStarted === 0)
-                startGame(2);
-                break;
+              keysActions.S.state = true; break;
+            case 16: //shift
+              keysActions.shift.state = true; break;
+          }
         }
+        switch(event.keyCode){
+          //start single game by pressing 1
+          case 49:
+            if(myGame.gameStarted === 0)
+            startGame(1);
+            break;
+          //start double game by pressing 2
+          case 50:
+            if(myGame.gameStarted === 0)
+            startGame(2);
+            break;
+        }
+        switch (event.keyCode) {
+          case 37: //left arrow
+          case 38: //up arrow
+          case 39: //right arrow
+          case 40: //down arrow
+          case 32: //space
+          case 65: //A
+          case 87: //W
+          case 68: //D
+          case 83: //S
+          case 16: //shift
+          console.log("this is happening")
+          for (var key in keysActions){
+            if (keysActions.hasOwnProperty(key)){
+              if (keysActions[key].state === true){
+                console.log("executing action")
+                keysActions[key].action();
+              }
+            }
+          }
+        }
+  };
+  document.onkeyup = function(){
+    switch (event.keyCode) {
+      case 37: //left arrow
+        keysActions.left.state = false; break;
+      case 38: //up arrow
+        keysActions.up.state = false; break;
+      case 39: //right arrow
+        keysActions.right.state = false; break;
+      case 40: //down arrow
+        keysActions.down.state = false; break;
+      case 32: //space
+        keysActions.space.state = false; break;
+      case 65: //A
+        keysActions.A.state = false; break;
+      case 87: //W
+        keysActions.W.state = false; break;
+      case 68: //D
+        keysActions.D.state = false; break;
+      case 83: //S
+        keysActions.S.state = false; break;
+      case 16: //shift
+        keysActions.shift.state = false; break;
+    }
   };
 }; 
