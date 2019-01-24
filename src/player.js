@@ -112,6 +112,6 @@ class Player {
     myBombs.push(new Bomb([bombX, bombY]));
     this.bombSound.play();
     //add the bomb to the grid to be considered as a boundary
-    setTimeout(function(){myGame.grid[bombX][bombY] = "B"},1000);
+    setTimeout(function(){myGame.grid[bombX][bombY] = "B"},1500);
   }
 }
