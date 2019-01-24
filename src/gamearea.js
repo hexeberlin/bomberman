@@ -45,9 +45,8 @@ class GameArea {
         this.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",this.canvas.width/2,550);
     }
     start(){
-        //stop the music and set play properties to default values
+        //set play properties to default values
         this.gameStarted = 1;
-        // this.introSound.pause();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.grid = copyArray(initialMap);
         this.frame = 0;

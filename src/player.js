@@ -109,6 +109,7 @@ class Player {
       }
     }
     myBombs.push(new Bomb([bombX, bombY]));
+    //add the bomb to the grid to be considered as a boundary
     setTimeout(function(){myGame.grid[bombX][bombY] = "B"},1000);
   }
 }

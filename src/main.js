@@ -106,6 +106,7 @@ function animation() {
 }
 
 function startGame(num) {
+  //stop intro music
   document.getElementById("introSound").pause();
   myGame.numOfPlayer = num;
   // re-set game and player properties, empty bombs arrat
@@ -140,42 +141,34 @@ function endGame(reason) {
   switch (reason) {
     case "time":
         myGame.ctx.fillText("TIME IS OVER", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "30px Arial";
+        myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "dead":
         myGame.ctx.fillText("YOU DIED", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "30px Arial";
+        myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP1":
         myGame.ctx.fillText("PLAYER ONE WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "30px Arial";
+        myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
     case "winP2":
         myGame.ctx.fillText("PLAYER TWO WINS!", myGame.canvas.width / 2, myGame.canvas.width / 2);
-        myGame.ctx.font = "30px Arial";
+        myGame.ctx.font = "bold 30px Arial";
         myGame.ctx.fillText("PRESS 1 TO START A SINGLE GAME",myGame.canvas.width/2,500);     
         myGame.ctx.fillText("PRESS 2 TO START A DOUBLE GAME",myGame.canvas.width/2,550);
         break;
   }
 }
-
 window.onload = function() {
+    //play intro music
+    document.getElementById("introSound").play()
     //start by showing the intro screen
-    var playPromise = document.getElementById("introSound").play() 
-    if (playPromise !== undefined){
-      playPromise.then(function(){
-        console.log('hey from promise')
-      }).catch(function(error){
-        console.log(playPromise)
-      })
-    } 
-
     myGame.intro();
     //define key actions depending on the state of the game
     document.onkeydown = function(event) {
