@@ -128,6 +128,7 @@ function startGame(num) {
 
 // end game if something happens
 function endGame(reason) {
+  myGame.gameStarted = 0;
   //stop the animation
   window.cancelAnimationFrame(myAnimation);
   //print a message according to the reason why the game stopped
@@ -164,6 +165,7 @@ function endGame(reason) {
 window.onload = function() {
     //start by showing the intro screen
     myGame.intro();
+    //define key actions depending on the state of the game
     document.onkeydown = function(event) {
         event.preventDefault();
         switch (event.keyCode) {
@@ -172,6 +174,7 @@ window.onload = function() {
             case 38: //up arrow
             case 39: //right arrow
             case 40: //down arrow
+                if(myGame.gameStarted === 1 && myPlayer1.alive === 1)
                 myPlayer1.move(event.keyCode);
                 break;
             //move player2 with WSAD
@@ -179,22 +182,27 @@ window.onload = function() {
             case 87: //W
             case 68: //D
             case 83: //S
+                if(myGame.gameStarted === 1 && myGame.numOfPlayer === 2 && myPlayer2.alive === 1)
                 myPlayer2.move(event.keyCode);
                 break;
             //place bomb with player1 using space
             case 32:
+                if(myGame.gameStarted === 1 && myPlayer1.alive === 1)
                 myPlayer1.placeBomb();
                 break;
-            //place bomb with player1 using space
+            //place bomb with player2 using shift
             case 16:
+                if(myGame.gameStarted === 1 && myGame.numOfPlayer === 2 && myPlayer2.alive === 1)
                 myPlayer2.placeBomb();
                 break;
             //start single game by pressing 1
             case 49:
+                if(myGame.gameStarted === 0)
                 startGame(1);
                 break;
             //start double game by pressing 2
             case 50:
+                if(myGame.gameStarted === 0)
                 startGame(2);
                 break;
         }

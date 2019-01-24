@@ -24,7 +24,7 @@ class GameArea {
         this.numOfPlayer = numOfPlayers;
     }
     intro(){
-        this.introSound.play();
+        // this.introSound.play();
         document.querySelector('#game-board').appendChild(this.canvas);
         this.ctx.fillStyle = 'black';
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
