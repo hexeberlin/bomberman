@@ -16,14 +16,14 @@ var initialMap = [[1,1,1,1,1,1,1,1,1,1,1,1,1],
 var initialSpeed = 10;
 // default starting positions
 var p1Position = {
-    left: 50 + (15 * (50 / 24)) / 4,
-    right: 50 + (15 * (50 / 24)) * 1.25,
+    left: 55,
+    right: 100,
     top: 50,
     down: 100
 }
 var p2Position = {
-    left: 650 + (15 * (50 / 24)) / 4,
-    right: 650 + (15 * (50 / 24)) * 1.25,
+    left: 655,
+    right: 700,
     top: 550,
     down: 600
 }
@@ -179,39 +179,39 @@ function endGame(reason) {
 var keysActions = {
   left: {
     state: false,
-    action(){ myPlayer1.move("left")}
+    action(){myPlayer1.move("left")}
   },
   right: {
     state: false,
-    action(){ myPlayer1.move("right")}
+    action(){myPlayer1.move("right")}
   },
   down: {
     state: false,
-    action(){ myPlayer1.move("down")}
+    action(){myPlayer1.move("down")}
   },
   up: {
     state: false,
-    action(){ myPlayer1.move("up")}
+    action(){myPlayer1.move("up")}
   },
   space: {
     state: false,
-    action(){ myPlayer1.placeBomb()}
+    action(){myPlayer1.placeBomb()}
   },
   W: {
     state: false,
-    action(){ myPlayer2.move("up")}
+    action(){myPlayer2.move("up")}
   },
   D: {
     state: false,
-    action(){ myPlayer2.move("right")}
+    action(){myPlayer2.move("right")}
   },
   S: {
     state: false,
-    action(){ myPlayer2.move("down")}
+    action(){myPlayer2.move("down")}
   },
   A: {
     state: false,
-    action(){ myPlayer2.move("left")}
+    action(){myPlayer2.move("left")}
   },
   shift: {
     state: false,
@@ -276,11 +276,9 @@ window.onload = function() {
           case 68: //D
           case 83: //S
           case 16: //shift
-          console.log("this is happening")
           for (var key in keysActions){
             if (keysActions.hasOwnProperty(key)){
               if (keysActions[key].state === true){
-                console.log("executing action")
                 keysActions[key].action();
               }
             }

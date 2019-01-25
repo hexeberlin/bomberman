@@ -20,7 +20,7 @@ class Bomb {
     }
     explode(){
         //let the bomb explode after 600 ms
-        if(myGame.frame - this.startingTime === 200 && myBombs.length > 0){
+        if(myGame.frame - this.startingTime >= 200 && myBombs.length > 0){
             //destroy all 2's (brick walls) which the bomb power can reach
             var bRow = this.position[0];
             var bCol = this.position[1];

@@ -58,14 +58,18 @@ class Player {
     switch (where) {
       case "left":
         newPosition.left -= this.speed;
+        newPosition.right -= this.speed;
         break;
       case "up":
         newPosition.top -= this.speed;
+        newPosition.down -= this.speed;
         break;
       case "right":
+        newPosition.left += this.speed;
         newPosition.right += this.speed;
         break;
       case "down":
+        newPosition.top += this.speed;
         newPosition.down += this.speed;
         break;
     }
@@ -96,7 +100,7 @@ class Player {
   }
   // update all sides
   update() {
-    this.right = this.left + 15 * (50 / 23);
+    this.right = Math.floor(this.left + 15 * (50 / 24));
     this.down = this.top + 50;
   }
   // place bomb in the cell where most of players icon is in
@@ -110,9 +114,5 @@ class Player {
     }
     myBombs.push(new Bomb([bombX, bombY]));
     this.bombSound.play();
-    //add the bomb to the grid to be considered as a boundary
-    setTimeout(function() {
-      myGame.grid[bombX][bombY] = "B";
-    }, 1500);
   }
 }
