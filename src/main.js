@@ -49,6 +49,7 @@ var myPlayer1 = new Player(p1Position.left, p1Position.right, p1Position.top, p1
 var myPlayer2 = new Player(p2Position.left, p2Position.right, p2Position.top, p2Position.down, playersImg, crop2);
 var myBombs = [];
 var myAnimation;
+var backMusic = new Audio("sounds/background.mp3")
 
 
 function updateEverything() {
@@ -110,6 +111,8 @@ function animation() {
 }
 
 function startGame(num) {
+  backMusic.currentTime = 0;
+  backMusic.play();
   myGame.numOfPlayer = num;
   // re-set game and player properties, empty bombs arrat
   if (num === 2) {myGame.numOfPlayer = 2};
@@ -136,6 +139,7 @@ function startGame(num) {
 
 // end game if something happens
 function endGame(reason) {
+  backMusic.pause();
   myGame.gameStarted = 0;
   //stop the animation
   window.cancelAnimationFrame(myAnimation);
