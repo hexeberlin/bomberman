@@ -32,15 +32,15 @@ class Bomb {
                     || (Math.abs(col - bCol) <= this.power && row === bRow)) {
                         if(myGame.grid[row][col] === 0){
                             myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){myGame.grid[row][col] = 0;}, 500);
+                            setTimeout(()=>{myGame.grid[row][col] = 0;}, 500);
                         } else if(myGame.grid[row][col] === 2){
                             myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){myGame.grid[row][col] = 0;}, 500);
+                            setTimeout(()=>{myGame.grid[row][col] = 0;}, 500);
                         } else if (myGame.grid[row][col] === "D") {
                             myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){
+                            setTimeout(()=>{
                                 myGame.grid[row][col] = "F";
-                                found.play();
+                                this.found.play();
                             }, 500); //found the door
                         }
                     }
