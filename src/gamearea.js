@@ -118,7 +118,7 @@ class GameArea {
         this.boundaries = [];
         for (var i=0; i<this.grid.length; i++){
             for (var j=0; j<this.grid[i].length; j++){
-                if(this.grid[i][j] === 1 || this.grid[i][j] === 2 || this.grid[i][j] === "B"){
+                if(this.grid[i][j] === 1 || this.grid[i][j] === 2 || this.grid[i][j] === "D"){
                     this.boundaries.push({top: 50*j, 
                                         down: 50*j+50,
                                         left: 50*i,

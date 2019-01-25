@@ -26,13 +26,13 @@ class Bomb {
             var bCol = this.position[1];
             var rows = myGame.grid.length;
             var cols = myGame.grid[0].length;
+            myGame.grid[bRow][bCol] = "E"; //show explosion first
+            setTimeout(()=>{myGame.grid[bRow][bCol] = 0;}, 500);
             for(let row = 0; row < rows; row ++){
                 for(let col = 0; col < cols; col++){
                     if((Math.abs(row - bRow) <= this.power && col === bCol)
                     || (Math.abs(col - bCol) <= this.power && row === bRow)) {
-                        if(myGame.grid[row][col] === 0){
-                            myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(()=>{myGame.grid[row][col] = 0;}, 500);
+                        if(myGame.grid[row][col] === 0){ 
                         } else if(myGame.grid[row][col] === 2){
                             myGame.grid[row][col] = "E"; //show explosion first
                             setTimeout(()=>{myGame.grid[row][col] = 0;}, 500);
