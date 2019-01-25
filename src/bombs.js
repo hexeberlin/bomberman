@@ -30,20 +30,22 @@ class Bomb {
                 for(let col = 0; col < cols; col++){
                     if((Math.abs(row - bRow) <= this.power && col === bCol)
                     || (Math.abs(col - bCol) <= this.power && row === bRow)) {
-                        if(myGame.grid[row][col] === 2){
+                        if(myGame.grid[row][col] === 0){
                             myGame.grid[row][col] = "E"; //show explosion first
-                            setTimeout(function(){myGame.grid[row][col] = 0;}, 1000);
+                            setTimeout(function(){myGame.grid[row][col] = 0;}, 500);
+                        } else if(myGame.grid[row][col] === 2){
+                            myGame.grid[row][col] = "E"; //show explosion first
+                            setTimeout(function(){myGame.grid[row][col] = 0;}, 500);
                         } else if (myGame.grid[row][col] === "D") {
                             myGame.grid[row][col] = "E"; //show explosion first
                             setTimeout(function(){
                                 myGame.grid[row][col] = "F";
                                 found.play();
-                            }, 1000); //found the door
+                            }, 500); //found the door
                         }
                     }
                 }
             }
-            myGame.grid[this.position[0]][this.position[1]] = 0;
             this.sound.play();
             //bomb should kill player if he is too close
             var deadSound = new Audio("sounds/uh_oh.mp3");

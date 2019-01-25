@@ -126,7 +126,7 @@ function startGame(num) {
     myPlayer2.draw();
   }
   // print instructions
-  document.getElementById("whatToDo").innerHTML = "Get away from the <b>bombs</b> and find the hidden <b>portal</b> before the <b>time</b> is over!"
+  document.getElementById("whatToDo").innerHTML = "Stay away from the <b>bombs</b> and find the hidden <b>portal</b> before the <b>time</b> is over!"
   if(myGame.numOfPlayer === 2){
     document.getElementById("instructions").innerText = "Player 1: ARROWS and SPACE <-----------------------------------------------> Player 2: WSAD and SHIFT"
   }
